@@ -1,6 +1,6 @@
 ## Dependencies
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
-Material Design by Google [Material Design](https://jamesmfriedman.github.io/rmwc/lists).
+- This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+- Material Design by Google [Material Design](https://jamesmfriedman.github.io/rmwc/lists).
  
  
 ## What is it About
