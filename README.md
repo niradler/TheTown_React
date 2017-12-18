@@ -9,3 +9,6 @@ Mafia, also known as Werewolf, is a party game created by Dmitry Davidoff in 198
 ## Something Missing? 
 
 The problem we trying to solve here is how to let all players play, insted of giving away of one player to manage the game.
+
+## See it in Action!
+ [Demo](https://niradler.github.io/TheTown_React/)
