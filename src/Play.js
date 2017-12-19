@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import {
   Card,
-  CardMedia,
   CardPrimary,
   CardTitle,
-  CardSubtitle,
   CardAction,
   CardSupportingText,
   CardActions
@@ -20,7 +18,7 @@ class Play extends Component {
     this.setState({
       ...this.props.state
     }, () => {
-      if (this.props.state.players_map.length == 0) {
+      if (this.props.state.players_map.length === 0) {
         this
           .props
           .sync({activeTabIndex: 0})

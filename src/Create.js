@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import {
     Card,
-    CardMedia,
     CardPrimary,
     CardTitle,
-    CardSubtitle,
     CardAction,
     CardSupportingText,
     CardActions
