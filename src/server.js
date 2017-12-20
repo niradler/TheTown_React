@@ -12,6 +12,7 @@ class Server {
         return gameKey;
     }
     joinGame(game_id, cb) {
+        if(!game_id)alert('missing game id!')
         this.firebase.database().ref('/games/' + game_id).once('value', (snapshot) => {
             const game = snapshot.val();
             const game_store = store.get();
@@ -20,7 +21,6 @@ class Server {
                 delete game.c_player;
             }
                 if (game.players_join) {
-                    debugger;
                     if (game.players_join.length < game.players_map.length) {
                         game.c_player = game.players_map[game.players_join.length];
                         game.c_player.name = game_store.name
@@ -38,6 +38,13 @@ class Server {
 
             game.game_id = game_id;
             store.set(game);
+            cb(game);
+        })
+    }
+    runningGame(game_id,cb){
+        if(!game_id)alert('missing game id!')
+        this.firebase.database().ref('/games/' + game_id).on('value', (snapshot) => {
+            const game = snapshot.val();
             cb(game);
         })
     }
