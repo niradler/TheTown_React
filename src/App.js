@@ -10,6 +10,7 @@ import {
 } from 'rmwc';
 import Create from './Create';
 import Play from './Play';
+import server from "./server";
 class App extends Component {
   constructor(props) {
     super();
@@ -26,10 +27,16 @@ class App extends Component {
     this.sync = this
       .sync
       .bind(this);
+     
+  }
+  componentWillMount(){
+    //server.joinGame()
   }
   sync(state) {
     this.setState({
       ...state
+    },()=>{
+      server.createGame(this.state)
     })
   }
   render() {
