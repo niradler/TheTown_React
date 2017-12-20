@@ -47,10 +47,14 @@ const state=this.state;
                     .map((p) => (
 
                       <ListItem ripple key={p.index}>
-                        <ListItemStartDetail>star_border</ListItemStartDetail>
+                        {this.state.c_player.index === p.index?<ListItemStartDetail>star_border</ListItemStartDetail>:''}
                         {state.showRole!==p.index?<ListItemText>{p.name}</ListItemText>:
                         <ListItemText>{p.role==='Citizen'?p.role:`${p.role} ${p.role_index}`}</ListItemText>}
-                        <ListItemEndDetail onClick={()=>{this.setState({showRole:state.showRole===p.index?-1:p.index})}} >info</ListItemEndDetail>
+                        {this.state.c_player.index === p.index?
+                          <ListItemEndDetail onClick={()=>{this.setState({showRole:state.showRole===p.index?-1:p.index})}} >info</ListItemEndDetail>:
+                          <ListItemEndDetail >search</ListItemEndDetail>
+                        }
+                        
                       </ListItem>
 
                     ))}
