@@ -16,14 +16,17 @@ class Server {
         if(!game_id)alert('missing game id!')
         this.firebase.database().ref('/games/' + game_id).once('value', (snapshot) => {
             const game = snapshot.val();
+            if(!game)return null;
             const game_store = store.get();
             const user_id=store.getId();
+            game.isFull=false;
             console.log(game);
             if (game.c_player && game.c_player._id) {
                 delete game.c_player;
             }
                 if (game.players_join) {
-                    if (game.players_join.length < game.players_map.length) {
+                    var playing = game.players_join.filter((p)=> p._id ===user_id)
+                    if (game.players_join.length < game.players_map.length && !(playing&&playing.length!==0) ){
                         game.c_player = game.players_map[game.players_join.length];
                         game.c_player.name = game_store.name;
                         game.c_player._id = user_id;
@@ -34,18 +37,22 @@ class Server {
                         }
                     } else {
                         try{
-                            var playing = game.players_join.filter((p)=> p._id ===user_id)
+                            
                             if (playing.length==1) {
                                 game.c_player = playing[0];
                                 this.c_player = game.c_player
                                 game.c_player.name = game_store.name
                             }else{
+                                debugger;
                                 alert('game is full!')
                                 console.log('game is full!')
+                                return null;
                             }
                         }catch(e){
+                            debugger;
                             alert('game is full!')
                             console.log('game is full!')
+                            return null;
                         }
                        
                     }

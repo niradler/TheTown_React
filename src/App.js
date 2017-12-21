@@ -50,6 +50,7 @@ this.setState({...state})
   }
   updateGameData(game){
     console.log('updateGameData',game)
+    if(game===null)return;
     const state = this.state;
     state.game_data = {...game};
     state.activeTabIndex=2;

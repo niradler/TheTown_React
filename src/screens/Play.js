@@ -8,7 +8,7 @@ import {
   CardSupportingText,
   CardActions
 } from 'rmwc';
-import {Grid, GridCell} from 'rmwc';
+import {Grid, GridCell,Icon} from 'rmwc';
 import {List, ListItemEndDetail, ListItem, ListItemText, ListItemStartDetail} from 'rmwc';
 import server from "../server";
 class Play extends Component {
@@ -21,8 +21,8 @@ class Play extends Component {
     server.runningGame(this.props.state.game_id,(game)=>{
       const state = this.props.state;
       state.players_join = game.players_join || [];
-      this.setState(state, () => {
-        if (this.props.state.players_map.length === 0) {
+      this.setState({...state,...game}, () => {
+        if (this.props.state.players_map.length === 0  || game.isFull) {
           this
             .props
             .sync({activeTabIndex: 0})
@@ -43,8 +43,8 @@ class Play extends Component {
             }}>
 
               <CardPrimary>
-                <CardTitle large>Playing</CardTitle>
-                <CardSubtitle >{this.state.game_id} </CardSubtitle>
+                <CardTitle large>Playing </CardTitle>
+                <CardSubtitle >{this.state.game_id} {this.state.status ? <Icon>done_all</Icon>:<Icon>alarm</Icon>} </CardSubtitle>
               </CardPrimary>
               <CardSupportingText>
                 <List>
