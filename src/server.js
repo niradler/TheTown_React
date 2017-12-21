@@ -4,6 +4,7 @@ class Server {
     constructor(config) {
         this.firebase = firebase.initializeApp(config);
         this.firebaseRef = firebase.database().ref('games');
+        this.c_player=null;
        
     }
     createGame(game) {
@@ -16,6 +17,7 @@ class Server {
         this.firebase.database().ref('/games/' + game_id).once('value', (snapshot) => {
             const game = snapshot.val();
             const game_store = store.get();
+            const user_id=store.getId();
             console.log(game);
             if (game.c_player && game.c_player._id) {
                 delete game.c_player;
@@ -23,15 +25,34 @@ class Server {
                 if (game.players_join) {
                     if (game.players_join.length < game.players_map.length) {
                         game.c_player = game.players_map[game.players_join.length];
-                        game.c_player.name = game_store.name
+                        game.c_player.name = game_store.name;
+                        game.c_player._id = user_id;
+                        this.c_player = game.c_player;
                         this.firebase.database().ref('/games/' + game_id).child('players_join').set([...game.players_join, game.c_player]);
+                        if(game.players_map.length === game.players_join.length+1){
+                            this.firebase.database().ref('/games/' + game_id).child('status').set(1);
+                        }
                     } else {
-                        alert('game is full!')
-                        console.log('game is full!')
+                        try{
+                            var playing = game.players_join.filter((p)=> p._id ===user_id)
+                            if (playing.length==1) {
+                                game.c_player = playing[0];
+                                this.c_player = game.c_player
+                                game.c_player.name = game_store.name
+                            }else{
+                                alert('game is full!')
+                                console.log('game is full!')
+                            }
+                        }catch(e){
+                            alert('game is full!')
+                            console.log('game is full!')
+                        }
+                       
                     }
                 } else {
-              
                     game.c_player = game.players_map[0];
+                    game.c_player._id = user_id;
+                    this.c_player = game.c_player
                     game.c_player.name = game_store.name
                     this.firebase.database().ref('/games/' + game_id).child('players_join').set([game.c_player]);
                 }

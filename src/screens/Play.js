@@ -38,7 +38,8 @@ class Play extends Component {
           <GridCell span="12">
 
             <Card style={{
-              width: '320px'
+              width: '320px',
+              margin:'auto'
             }}>
 
               <CardPrimary>

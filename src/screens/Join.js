@@ -14,14 +14,21 @@ import {FormField, TextField} from 'rmwc';
 class Create extends Component {
     constructor(props) {
         super();
-        this.state = {};
+        this.state = {
+            name: "Player " + props.userId
+        };
     }
-    componentWillMount(){
-      
-    }
-    
-    joinGame(){         
-this.props.sync(this.state)
+    componentWillMount() {}
+
+    joinGame() {
+        if(this.state.name && this.state.game_id){
+            this
+            .props
+            .sync(this.state)
+
+        }else{
+            alert('missing values!')
+        }
         
     }
     render() {
@@ -32,7 +39,8 @@ this.props.sync(this.state)
 
                         <Card
                             style={{
-                            width: '320px'
+                            width: '320px',
+                            margin:'auto'
                         }}>
 
                             <CardPrimary>
@@ -40,22 +48,31 @@ this.props.sync(this.state)
                             </CardPrimary>
                             <CardSupportingText>
                                 <FormField>
-                                    <TextField label="Name" onChange={(e)=>this.setState({name:e.target.value})} type="text"/>
+                                    <TextField
+                                        label="Name"
+                                        onChange={(e) => this.setState({name: e.target.value})}
+                                        value={this.state.name}
+                                        type="text"
+                                        id="name"/>
                                 </FormField>
                                 <FormField>
-                                    <TextField label="Game ID" onChange={(e)=>this.setState({game_id:e.target.value})}  type="text"/>
+                                    <TextField
+                                        label="Game ID"
+                                        onChange={(e) => this.setState({game_id: e.target.value})}
+                                        type="text" id="gameId"/>
                                 </FormField>
                             </CardSupportingText>
                             <CardActions>
                                 <CardAction></CardAction>
+                                <CardAction></CardAction>
                                 <CardAction>
+                                    <Button
+                                        raised
+                                        onClick={this
+                                        .joinGame
+                                        .bind(this)}>Join</Button>
                                 </CardAction>
-                                <CardAction>
-                                    <Button raised onClick={this.joinGame.bind(this)}>Join</Button>
-                                </CardAction>
-                                <CardAction>
-                                    
-                                </CardAction>
+                                <CardAction></CardAction>
 
                             </CardActions>
                         </Card>

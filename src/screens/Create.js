@@ -27,7 +27,7 @@ class Create extends Component {
             detective:'',
             detective_indexes:[],
             players_map:[],
-            name:"Player " + Math.round(Math.random()*1000)
+            name:"Player " + this.props.userId
         };
         this.setState(state,()=>{
             if(update)
@@ -36,6 +36,13 @@ class Create extends Component {
       
     }
     startGame(){
+        if(!(this.state.name &&
+             this.state.players &&
+             this.state.assassins &&
+             this.state.detective)){
+                alert('missing values!')
+                return;
+        }
         const state= this.state;
         state.players_map=[];
         for (let i = 0; i < state.players; i++) {
@@ -81,7 +88,8 @@ class Create extends Component {
 
                         <Card
                             style={{
-                            width: '320px'
+                            width: '320px',
+                            margin:'auto'
                         }}>
 
                             <CardPrimary>

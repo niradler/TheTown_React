@@ -43,7 +43,7 @@ class App extends Component {
      this.updateGameData=this.updateGameData.bind(this);
   }
   componentWillMount(){
-
+    this.setState({userId:store.getId()})
   }
   sync(state){
 this.setState({...state})
@@ -100,13 +100,13 @@ store.set(state);
         </TabBar>
 
         {this.state.activeTabIndex === 0
-          ? <Create sync={this.createGame}/>
+          ? <Create sync={this.createGame} userId={this.state.userId}/>
           : ''}
           {this.state.activeTabIndex === 2
           ? 
-           <Play sync={this.sync} state={this.state.game_data}/>:''}
+           <Play sync={this.sync} state={this.state.game_data} userId={this.state.userId}/>:''}
           {this.state.activeTabIndex === 1
-          ? <Join sync={this.joinGame}/>
+          ? <Join sync={this.joinGame} userId={this.state.userId}/>
           : ''}
 
       </div>
