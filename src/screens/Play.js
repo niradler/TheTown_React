@@ -72,8 +72,7 @@ class Play extends Component {
                 <CardTitle large>Playing  
                 </CardTitle>
                 <CardSubtitle >
-                <a href={`https://web.whatsapp.com/send?text=${this.state.game_id}`} data-action="share/whatsapp/share">{this.state.game_id} </a>
-                  
+                <a href={`http://whatsapp://send?text=${this.state.game_id}`} data-action="share/whatsapp/share">Share via Whatsapp</a>
                   {this.state.status
                     ? <Icon>done_all</Icon>
                     : <Icon>alarm</Icon>}
