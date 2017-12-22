@@ -9,10 +9,12 @@ class Server {
     }
     createGame(game) {
         var gameKey = this.firebase.database().ref().child('games').push(game).key;
+        this.game_id = gameKey;
         console.log('gameKey', gameKey);
         return gameKey;
     }
     joinGame(game_id, cb) {
+        this.game_id=game_id;
         if(!game_id)alert('missing game id!')
         this.firebase.database().ref('/games/' + game_id).once('value', (snapshot) => {
             const game = snapshot.val();
@@ -75,6 +77,11 @@ class Server {
             const game = snapshot.val();
             cb(game);
         })
+    }
+    updateGame(stage,userAction){
+        this.firebase.database().ref('/games/' + this.game_id).child('game_stage').set(stage);
+        if(userAction)
+        this.firebase.database().ref('/games/' + this.game_id).child('user_action').push(userAction);
     }
 }
 const config = {

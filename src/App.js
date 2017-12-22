@@ -28,7 +28,9 @@ class App extends Component {
       players_map: [],
       players_join: [],
       game_id:"",
-      c_player:{}
+      c_player:{},
+      status:0,
+      game_stage:0
       }
     };
     this.sync = this

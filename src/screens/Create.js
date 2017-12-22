@@ -27,7 +27,8 @@ class Create extends Component {
             detective:'',
             detective_indexes:[],
             players_map:[],
-            name:"Player " + this.props.userId
+            name:"Player " + this.props.userId,
+            game_owner:this.props.userId
         };
         this.setState(state,()=>{
             if(update)

@@ -18,7 +18,9 @@ class Create extends Component {
             name: "Player " + props.userId
         };
     }
-    componentWillMount() {}
+    componentWillMount() {
+        debugger;
+    }
 
     joinGame() {
         if(this.state.name && this.state.game_id){
